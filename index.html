@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portal K3 Pusdiklat</title>
+<meta name="description" content="Portal pemantauan Keselamatan dan Kesehatan Kerja (K3) Kantor Induk PLN Pusdiklat. Akses data hanya untuk pengguna terdaftar.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#EEF2F7; --surface:#FFFFFF; --sunk:#E8EEF5; --ink:#1E293B; --ink2:#475569; --mute:#64748B; --line:#DBE2EA;
+  --hero:#0A4595; --hero-ink:#FFFFFF; --hero-mute:#C9D8EE; --hero-line:#ffffff2e; --signal:#FFB800; --brand:#0A4595;
+  --live:#15803D; --live-soft:#E6F6EC; --dev:#B45309; --dev-soft:#FEF3E2;
+  --data:#0369A1; --data-soft:#E0F2FE; --plan:#64748B; --plan-soft:#EEF2F6;
+  --bad:#DC2626; --bad-soft:#FEF2F2; --ill:#94A3B8;
+  --accent:#FFB800; --accent-ink:#063068;
+  --display:'Barlow Semi Condensed','Arial Narrow',system-ui,sans-serif;
+  --body:'Source Sans 3',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:var(--display);line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px}
+.eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--mute)}
+
+/* top bar */
+.bar{background:var(--hero);border-bottom:1px solid var(--hero-line);padding-top:env(safe-area-inset-top,0px)}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px}
+.logo{display:flex;align-items:center;gap:10px;color:var(--hero-ink);text-decoration:none;font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.01em}
+.logo svg{width:28px;height:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:700;font-size:15px;padding:12px 22px;border-radius:6px;min-height:46px;border:0;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.small{padding:8px 16px;min-height:38px;font-size:14px}
+.btn.line{border:1px solid var(--hero-line);color:var(--hero-ink)}
+.btn.line:hover{border-color:var(--hero-mute)}
+.btn:focus-visible,a:focus-visible{outline:3px solid var(--signal);outline-offset:2px;box-shadow:0 0 0 5px var(--brand)}
+
+/* hero */
+.hero{background:var(--hero);color:var(--hero-ink);padding-block:56px 64px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:48px;align-items:center}
+.hero h1{font-size:clamp(38px,6.4vw,68px);font-weight:700;letter-spacing:-.005em}
+.hero h1 em{font-style:normal;color:var(--signal)}
+.hero .lead{color:var(--hero-mute);font-size:18px;max-width:52ch;margin-top:18px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.lock{display:flex;align-items:center;gap:8px;margin-top:18px;font-size:13px;color:var(--hero-mute)}
+.lock svg{width:15px;height:15px;flex-shrink:0}
+
+/* hero plate: pillars of K3 */
+.plate{border:1px solid var(--hero-line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:2px;background:#ffffff08}
+.plate .eyebrow{color:var(--hero-mute);margin-bottom:10px}
+.pl{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--hero-line)}
+.pl:first-of-type{border-top:0}
+.pl .ic{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:#ffffff10;color:var(--signal)}
+.pl .ic svg{width:18px;height:18px}
+.pl b{font-weight:600;font-size:15px}
+.pl small{display:block;color:var(--hero-mute);font-size:12px}
+.pl .st{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.b-live{background:var(--live-soft);color:var(--live)}
+.b-dev{background:var(--dev-soft);color:var(--dev)}
+.b-data{background:var(--data-soft);color:var(--data)}
+.b-plan{background:var(--plan-soft);color:var(--plan)}
+
+main .wrap{display:flex;flex-direction:column;gap:64px;padding-block:56px 72px}
+section{display:flex;flex-direction:column;gap:22px;scroll-margin-top:24px}
+.sh{display:flex;flex-direction:column;gap:8px;max-width:64ch}
+.sh h2{font-size:clamp(28px,4vw,36px)}
+.sh p{color:var(--ink2)}
+
+/* modules */
+.mods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.mod{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.mod .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.mod .ic{width:42px;height:42px;border-radius:10px;background:#E3ECF8;display:grid;place-items:center;color:var(--brand)}
+.mod .ic svg{width:22px;height:22px}
+.mod h3{font-size:22px}
+.mod p{font-size:14px;color:var(--ink2)}
+.mod ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:12px;margin-top:auto}
+.mod li{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px}
+.mod.wide{grid-column:span 2}
+.mod.full{grid-column:1/-1}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 12px;font-size:13px;color:var(--ink2);align-items:center}
+
+/* MLI strip */
+.mli{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--line);gap:1px}
+.mli div{background:var(--surface);padding:16px;display:flex;flex-direction:column;gap:6px}
+.mli .n{font-family:var(--mono);font-weight:700;color:var(--brand);font-size:14px}
+.mli b{font-size:15px;line-height:1.3}
+.mli small{font-size:12px;color:var(--mute)}
+
+/* access */
+.access{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:s}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.step .n{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--mute)}
+.step h3{font-size:20px}
+.step p{font-size:14px;color:var(--ink2)}
+.callout{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;background:var(--hero);color:var(--hero-ink);border-radius:10px;padding:24px}
+.callout p{color:var(--hero-mute);max-width:60ch;font-size:15px}
+.callout h3{font-size:24px;margin-bottom:6px}
+
+footer{border-top:1px solid var(--line);padding-block:22px calc(28px + env(safe-area-inset-bottom,0px));font-size:13px;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:920px){
+  .hero .wrap{grid-template-columns:1fr;gap:32px}
+  .mods{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mli{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:600px){
+  .mods,.access{grid-template-columns:1fr}
+  .mod.wide,.mod.full{grid-column:auto}
+  .mli{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero{padding-block:40px 44px}
+  .bar .btn.small span{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Portal K3 Pusdiklat, ke atas">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2 25 6.5v7.2c0 6.3-4.6 11.2-11 12.3C7.6 24.9 3 20 3 13.7V6.5L14 2Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 14.5l3.4 3.3L19.5 10" fill="none" stroke="var(--signal)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Portal K3 Pusdiklat
+    </a>
+    <a class="btn primary small" href="masuk.html"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span>Masuk</span></a>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow" style="color:var(--hero-mute)">K3L &amp; KAM · Kantor Induk PLN Pusdiklat</span>
+      <h1 style="margin-top:14px">Seluruh kinerja K3 Pusdiklat, <em>tercatat digital</em> di satu tempat.</h1>
+      <p class="lead">Inspeksi peralatan proteksi kebakaran, sertifikasi peralatan, pengukuran lingkungan kerja, dan jam kerja aman dipantau dari satu portal, sekaligus menjadi bukti pemenuhan Maturity Level K3.</p>
+      <div class="cta">
+        <a class="btn primary" href="masuk.html">Masuk ke Portal</a>
+        <a class="btn line" href="#modul">Lihat cakupan modul</a>
+      </div>
+      <p class="lock"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Data hanya dapat dibuka oleh akun Google yang sudah didaftarkan admin K3.</p>
+    </div>
+
+    <div class="plate" aria-label="Ringkasan cakupan">
+      <span class="eyebrow">Yang dipantau</span>
+      <div class="pl"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1 3 4 4.5 4 8.5A4 4 0 0 1 8 12c0-1.5.7-2.6 1.5-3.4C9.7 10 10.6 11 12 11c0-3-1-5 0-8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 20h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><div><b>Proteksi kebakaran</b><small>APAR, hidran, pompa, alarm</small></div><span class="st b-live">Berjalan</span></div>
+      <div class="pl"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><div><b>Sertifikasi peralatan</b><small>Masa berlaku riksa uji</small></div><span class="st b-live">Berjalan</span></div>
+      <div class="pl"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18c2.5-6 5-9 8-9s5.5 3 8 9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="5" r="1.8" fill="currentColor"/></svg></span><div><b>Lingkungan kerja</b><small>Fisika, kimia, biologi, ergonomi</small></div><span class="st b-data">Data siap</span></div>
+      <div class="pl"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><div><b>Jam kerja aman</b><small>SR, FR, dan AR bulanan</small></div><span class="st b-data">Data siap</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <section id="modul">
+    <div class="sh">
+      <span class="eyebrow">Cakupan modul</span>
+      <h2>Satu portal, banyak sistem pemantauan</h2>
+      <p>Portal menghubungkan sistem yang sudah berjalan dan menampung modul yang sedang dibangun. Status setiap modul ditampilkan apa adanya.</p>
+    </div>
+    <div class="legend">
+      <span class="badge b-live">Beroperasi</span>
+      <span class="badge b-dev">Sedang dikembangkan</span>
+      <span class="badge b-data">Data tersedia, sistem belum</span>
+      <span class="badge b-plan">Direncanakan</span>
+    </div>
+    <div class="mods">
+      <article class="mod wide">
+        <div class="top"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1 3 4 4.5 4 8.5A4 4 0 0 1 8 12c0-1.5.7-2.6 1.5-3.4C9.7 10 10.6 11 12 11c0-3-1-5 0-8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 20h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></div>
+        <h3>Kesiapan Sistem Proteksi Kebakaran</h3>
+        <p>Inspeksi rutin setiap peralatan pemadam, dari scan QR di lapangan sampai rekap kesiapan semester.</p>
+        <ul>
+          <li>Inspeksi APAR <span class="badge b-live">Beroperasi</span></li>
+          <li>Inspeksi Hidran <span class="badge b-dev">Sedang dikembangkan</span></li>
+          <li>Inspeksi Pompa Pemadam (jockey, electric, diesel) <span class="badge b-plan">Direncanakan</span></li>
+          <li>Inspeksi Alarm &amp; Detektor <span class="badge b-plan">Direncanakan</span></li>
+          <li>Jalur Evakuasi, Lampu Darurat &amp; EXIT <span class="badge b-plan">Direncanakan</span></li>
+        </ul>
+      </article>
+      <article class="mod">
+        <div class="top"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="badge b-live">Beroperasi</span></div>
+        <h3>Sertifikasi Peralatan K3</h3>
+        <p>Masa berlaku sertifikat elevator, instalasi listrik, penyalur petir, proteksi kebakaran, dan pesawat tenaga, dengan pengingat sebelum jatuh tempo.</p>
+      </article>
+      <article class="mod">
+        <div class="top"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18c2.5-6 5-9 8-9s5.5 3 8 9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="5" r="1.8" fill="currentColor"/></svg></span><span class="badge b-data">Data tersedia</span></div>
+        <h3>Pengukuran Lingkungan Kerja</h3>
+        <p>Hasil ukur iklim kerja, pencahayaan, kebisingan, kualitas udara, dan ergonomi per ruang, beserta tindak lanjutnya.</p>
+      </article>
+      <article class="mod">
+        <div class="top"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="badge b-data">Data tersedia</span></div>
+        <h3>Jam Kerja Aman</h3>
+        <p>Akumulasi jam orang selamat serta rasio kecelakaan (SR, FR, AR) yang dilaporkan setiap bulan.</p>
+      </article>
+      <article class="mod">
+        <div class="top"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 19c.8-3.3 3-5 5.5-5s4.7 1.7 5.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 11l1.8 1.8L21 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="badge b-plan">Direncanakan</span></div>
+        <h3>Lisensi K3 &amp; Tanggap Darurat</h3>
+        <p>Masa berlaku lisensi K3 pegawai, kesiapan personil tanggap darurat, dan pelaksanaan simulasi.</p>
+      </article>
+      <article class="mod full">
+        <div class="top"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v10H9l-4 4V5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 10h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="badge b-plan">Direncanakan</span></div>
+        <h3>P2K3 &amp; Tindak Lanjut Temuan</h3>
+        <p>Rapat P2K3 bulanan dan satu daftar temuan dari seluruh inspeksi dan audit, lengkap dengan PIC dan tenggat.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh">
+      <span class="eyebrow">Maturity Level K3</span>
+      <h2>Setiap data menjadi bukti kinerja</h2>
+      <p>Modul di portal ini disusun mengikuti enam kelompok program Maturity Level Index K3, sehingga hasil pemantauan harian langsung bisa dipakai sebagai eviden.</p>
+    </div>
+    <div class="mli">
+      <div><span class="n">1</span><b>Perencanaan &amp; sistem manajemen</b><small>RKAP K3, CSMS, SMK3</small></div>
+      <div><span class="n">2</span><b>Pemantauan &amp; evaluasi</b><small>Inspeksi, audit, lingkungan kerja, MCU</small></div>
+      <div><span class="n">3</span><b>Pengendalian risiko</b><small>Izin kerja, proteksi kebakaran, tanggap darurat</small></div>
+      <div><span class="n">4</span><b>Kompetensi</b><small>Pelatihan dan edukasi K3</small></div>
+      <div><span class="n">5</span><b>Komunikasi &amp; partisipasi</b><small>P2K3, edukasi masyarakat</small></div>
+      <div><span class="n">6</span><b>Pelaporan</b><small>Aplikasi Inspekta</small></div>
+    </div>
+  </section>
+
+  <section id="akses">
+    <div class="sh">
+      <span class="eyebrow">Akses</span>
+      <h2>Cara masuk ke portal</h2>
+      <p>Halaman ini terbuka untuk umum, tetapi seluruh data K3 berada di balik login.</p>
+    </div>
+    <div class="access">
+      <div class="step"><span class="n">LANGKAH 1</span><h3>Klik Masuk</h3><p>Tombol Masuk ada di pojok kanan atas dan di bagian atas halaman ini.</p></div>
+      <div class="step"><span class="n">LANGKAH 2</span><h3>Pilih akun Google</h3><p>Gunakan akun Google yang Anda daftarkan ke admin K3.</p></div>
+      <div class="step"><span class="n">LANGKAH 3</span><h3>Buka dashboard</h3><p>Jika akun sudah terdaftar, dashboard kinerja K3 langsung terbuka. Jika belum, akses akan ditolak.</p></div>
+    </div>
+    <div class="callout">
+      <div><h3>Belum punya akses?</h3><p>Hubungi Tim K3L &amp; KAM Kantor Induk Pusdiklat dan sebutkan alamat email Google yang akan dipakai. Akses diberikan sesuai kebutuhan tugas.</p></div>
+      <a class="btn primary" href="masuk.html">Masuk ke Portal</a>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Portal K3 Pusdiklat · dikelola Tim K3L &amp; KAM Kantor Induk</span>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
