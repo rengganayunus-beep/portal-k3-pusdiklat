@@ -3,7 +3,7 @@
   "short_name": "Portal K3",
   "start_url": "./",
   "scope": "./",
-  "display": "standalone",
+  "display": "browser",
   "background_color": "#0A4595",
   "theme_color": "#0A4595",
   "icons": [
