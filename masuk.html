@@ -5,54 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Masuk · Portal K3 Pusdiklat</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0A4595">
+<meta name="theme-color" content="#0C5A6E">
 <meta name="apple-mobile-web-app-title" content="Portal K3">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
 :root{
-  color-scheme:light;--bg:#0A4595;--card:#FFFFFF;--ink:#1E293B;--ink2:#475569;--line:#DBE2EA;
-  --accent:#0A4595;--accent-ink:#fff;--signal:#FFB800;--live:#15803D;--live-soft:#E6F6EC;
+  color-scheme:light;--card:#FFFFFF;--ink:#0F2430;--ink2:#4C6572;--line:#E3EAEC;
+  --teal-dk:#0A2E44;--teal:#0C5A6E;--teal-lt:#19A9B8;--cyan:#2FD1DD;
+  --live:#15803D;--live-soft:#E6F6EC;
   --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
 }
 *{box-sizing:border-box}
 html,body{min-height:100%}
-body{margin:0;background:var(--bg);font-family:'Source Sans 3',system-ui,sans-serif;color:var(--ink);display:grid;place-items:center;padding:28px 16px}
+body{margin:0;font-family:'Inter',system-ui,sans-serif;color:var(--ink);display:flex;flex-direction:column;min-height:100vh;
+  background:
+    radial-gradient(900px 500px at 85% 8%, #1C8FA0 0%, transparent 60%),
+    linear-gradient(135deg, #07202E 0%, #0A3B4D 42%, #0C5A6E 72%, #148C96 100%);
+}
+.bar{height:8px;flex-shrink:0;background:linear-gradient(90deg,var(--teal-dk),var(--teal-lt),var(--cyan))}
+.main{flex:1;display:grid;place-items:center;padding:32px 16px}
 .wrap{max-width:460px;width:100%;display:flex;flex-direction:column;gap:16px}
-.hd{text-align:center;color:#fff;display:flex;flex-direction:column;gap:6px}
+.hd{text-align:center;color:#fff;display:flex;flex-direction:column;gap:8px}
 .hd svg{width:40px;height:40px;margin:0 auto;color:#fff}
-.hd .eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#C9D8EE}
-.hd h1{font-family:'Barlow Semi Condensed','Arial Narrow',sans-serif;font-size:26px;margin:0;line-height:1.15}
-.card{background:var(--card);border-radius:12px;padding:22px 20px;display:flex;flex-direction:column;gap:10px}
+.hd .eyebrow{display:inline-flex;align-self:center;align-items:center;gap:7px;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:#BFEFF2;background:#ffffff14;border:1px solid #ffffff2a;padding:6px 13px;border-radius:999px}
+.hd .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan)}
+.hd h1{font-size:25px;font-weight:800;margin:4px 0 0;line-height:1.2;letter-spacing:-.01em}
+.hd h1 span{color:#6FE3EA}
+.hd .tag{font-size:12.5px;color:#AFD8DC;margin:0}
+.card{background:var(--card);border-radius:16px;padding:22px 20px;display:flex;flex-direction:column;gap:10px;box-shadow:0 20px 44px -20px #00131c70}
 .card .num{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:700;font-size:12px;color:var(--ink2)}
-.card .num span{width:20px;height:20px;border-radius:50%;background:#E3ECF8;color:var(--accent);display:grid;place-items:center;font-size:11px}
-.card h2{font-family:'Barlow Semi Condensed','Arial Narrow',sans-serif;font-size:21px;margin:0}
+.card .num span{width:20px;height:20px;border-radius:50%;background:#E3F4F6;color:var(--teal);display:grid;place-items:center;font-size:11px}
+.card h2{font-size:18.5px;font-weight:800;margin:0}
 .card p{margin:0;color:var(--ink2);font-size:14px;line-height:1.55}
-a.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;min-height:46px;border-radius:6px;font-weight:700;text-decoration:none;font-size:15px;margin-top:4px}
-a.btn.primary{background:var(--signal);color:#063068}
-a.btn.line{background:#fff;color:var(--accent);border:1.5px solid var(--line)}
+a.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;min-height:48px;border-radius:10px;font-weight:700;text-decoration:none;font-size:14.5px;margin-top:4px}
+a.btn.primary{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:0 1px 2px #0000000a}
+a.btn.line{background:#fff;color:var(--teal);border:1.5px solid var(--line)}
 a.btn:hover{filter:brightness(.97)}
-a.btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+a.btn:focus-visible{outline:2px solid var(--teal-lt);outline-offset:2px}
 .badge{align-self:flex-start;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:var(--live-soft);color:var(--live)}
-.foot{font-size:12px;color:#C9D8EE;text-align:center;line-height:1.5}
-.foot a{color:#fff}
+.foot{font-size:12px;color:#BFE6E9;text-align:center;line-height:1.5}
+.foot a{color:#fff;font-weight:600}
 </style>
 </head>
 <body>
+<div class="bar"></div>
+<div class="main">
 <div class="wrap">
   <div class="hd">
     <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2 25 6.5v7.2c0 6.3-4.6 11.2-11 12.3C7.6 24.9 3 20 3 13.7V6.5L14 2Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 14.5l3.4 3.3L19.5 10" fill="none" stroke="#FFB800" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span class="eyebrow">Portal K3 Pusdiklat</span>
-    <h1>Masuk ke Dashboard Portal K3</h1>
+    <span class="eyebrow"><span class="dot"></span>Pusat Pendidikan dan Pelatihan PLN</span>
+    <h1>Masuk ke <span>Portal K3</span> Pusdiklat</h1>
+    <p class="tag">#ZeroAccidentCulture &middot; #K3MencegahLebihBaik</p>
   </div>
 
   <div class="card">
     <span class="num"><span>1</span>SUDAH TERDAFTAR</span>
     <h2>Masuk</h2>
     <p>Akun Google Anda sudah diizinkan Tim K3L &amp; KAM. Klik tombol di bawah, dashboard langsung terbuka.</p>
-    <a class="btn primary" href="https://script.google.com/macros/s/AKfycby1Ayua8Jqd6UJPuzB9QifTZSqlM53n0EaTva_J8Wb_OiDRdAAQbt7TVWLZ2qyyVOHKZA/exec" target="_top">Masuk ke Dashboard</a>
+    <a class="btn primary" href="https://script.google.com/macros/s/AKfycby1Ayua8Jqd6UJPuzB9QifTZSqlM53n0EaTva_J8Wb_OiDRdAAQbt7TVWLZ2qyyVOHKZA/exec" target="_top">
+      <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l5.7-5.7C34.6 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16 18.9 13 24 13c3.1 0 5.8 1.1 8 3l5.7-5.7C34.6 6.1 29.6 4 24 4c-7.5 0-13.9 4.2-17.1 10.3z"/><path fill="#4CAF50" d="M24 44c5.5 0 10.4-1.9 14.1-5l-6.5-5.5C29.5 35.4 26.9 36 24 36c-5.3 0-9.7-3.1-11.3-7.5l-6.6 5.1C9.9 39.6 16.4 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.3 5.5l6.5 5.5C40.9 36.5 44 30.9 44 24c0-1.3-.1-2.7-.4-3.5z"/></svg>
+      Masuk ke Dashboard
+    </a>
   </div>
 
   <div class="card">
@@ -64,5 +80,7 @@ a.btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
 
   <p class="foot">Kedua tombol membawa ke pintu yang sama — sistem otomatis mengenali akun Anda sudah terdaftar atau perlu mengajukan dulu.<br><a href="index.html">← Kembali ke beranda</a></p>
 </div>
+</div>
+<div class="bar"></div>
 </body>
 </html>
